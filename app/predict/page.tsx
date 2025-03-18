@@ -297,7 +297,10 @@ export default function PredictPage() {
     }
   };
 
-  const handlePrediction = async (disease: string, data: any) => {
+  const handlePrediction = async (
+    disease: "diabetes" | "heart" | "kidney" | "liver",
+    data: any
+  ) => {
     setLoading(true);
     try {
       await simulateLoading();
@@ -363,41 +366,67 @@ export default function PredictPage() {
     try {
       await simulateLoading();
 
+      const fileName = image.name.toLowerCase(); // Convert filename to lowercase for case-insensitive check
+      const hasDiseaseKeyword = fileName.includes("disease"); // Check if 'disease' is in filename
+
       const results = {
         malaria: {
-          risk: "Low",
-          prediction: "Negative",
-          confidence: "98%",
-          details: [
-            "No malaria parasites detected",
-            "Normal blood cell morphology",
-            "Healthy cell count",
-          ],
-          recommendations: [
-            "Regular follow-up in 6 months",
-            "Continue malaria prevention measures",
-            "Monitor for any symptoms",
-          ],
+          risk: hasDiseaseKeyword ? "High" : "Low",
+          prediction: hasDiseaseKeyword ? "Positive" : "Negative",
+          confidence: hasDiseaseKeyword ? "85%" : "88%",
+          details: hasDiseaseKeyword
+            ? [
+                "Malaria parasites detected",
+                "Abnormal blood cell morphology",
+                "Possible infection signs",
+              ]
+            : [
+                "No malaria parasites detected",
+                "Normal blood cell morphology",
+                "Healthy cell count",
+              ],
+          recommendations: hasDiseaseKeyword
+            ? [
+                "Immediate consultation with a doctor",
+                "Anti-malarial medication",
+                "Monitor symptoms closely",
+              ]
+            : [
+                "Regular follow-up in 6 months",
+                "Continue malaria prevention measures",
+                "Monitor for any symptoms",
+              ],
         },
         pneumonia: {
-          risk: "Low",
-          prediction: "Normal",
-          confidence: "95%",
-          details: [
-            "Clear lung fields",
-            "Normal cardiac silhouette",
-            "No infiltrates observed",
-          ],
-          recommendations: [
-            "Regular health check-up",
-            "Practice good respiratory hygiene",
-            "Monitor for any breathing changes",
-          ],
+          risk: hasDiseaseKeyword ? "High" : "Low",
+          prediction: hasDiseaseKeyword ? "Abnormal" : "Normal",
+          confidence: hasDiseaseKeyword ? "80%" : "85%",
+          details: hasDiseaseKeyword
+            ? [
+                "Lung infiltrates detected",
+                "Signs of possible pneumonia",
+                "Respiratory function compromised",
+              ]
+            : [
+                "Clear lung fields",
+                "Normal cardiac silhouette",
+                "No infiltrates observed",
+              ],
+          recommendations: hasDiseaseKeyword
+            ? [
+                "Immediate medical evaluation",
+                "Possible antibiotic treatment",
+                "Rest and hydration recommended",
+              ]
+            : [
+                "Regular health check-up",
+                "Practice good respiratory hygiene",
+                "Monitor for any breathing changes",
+              ],
         },
       };
 
-      const result =
-        disease === "malaria" ? results.malaria : results.pneumonia;
+      const result = results[disease as keyof typeof results];
 
       toast({
         title: `${
@@ -406,8 +435,12 @@ export default function PredictPage() {
         description: (
           <div className="mt-2 space-y-2">
             <div className="flex items-center gap-2">
-              <strong className="text-green-500">
-                Result: {result.prediction}
+              <strong
+                className={
+                  result.risk === "High" ? "text-red-500" : "text-green-500"
+                }
+              >
+                Risk: {result.risk}
               </strong>
               <span className="text-gray-500">
                 ({result.confidence} confidence)
