@@ -88,7 +88,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/3">
               <img
-                src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                src="/profile.png"
                 alt="Doctor"
                 className="rounded-lg shadow-lg"
               />
@@ -98,14 +98,21 @@ export default function Home() {
                 Dr. Rahul Chinawale
               </h3>
               <p className="text-gray-600 mb-6">
-                With over 15 years of experience in general medicine, Dr.
-                Chinawale specializes in preventive care and chronic disease
-                management. He believes in a holistic approach to healthcare and
-                building long-term relationships with her patients.
+                Experienced General Practitioner Dr. Rahul Chinawale is a highly
+                qualified medical professional with an M.B.B.S. from Seth G.S.
+                Medical College, Mumbai University (1998) and over two decades
+                of clinical experience. He has worked extensively as a Medical
+                Officer in government and private healthcare, including roles at
+                K.E.M. Hospital, Jehangir Hospital, and PHCs in Maharashtra. His
+                expertise spans general practice, emergency care, endocrinology,
+                and public health programs like tuberculosis and malaria
+                control. With a strong commitment to patient care, he has also
+                served as a General Practitioner in Dombivli for four years.
               </p>
               <div className="flex items-center gap-4">
                 <Phone className="w-5 h-5 text-primary" />
-                <span className="text-gray-600">+1 (555) 123-4567</span>
+                <span className="text-gray-600">9930908114</span>
+                <span className="text-gray-600">rahulchinawale@gmail.com</span>
               </div>
             </div>
           </div>
