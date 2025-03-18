@@ -30,7 +30,7 @@ export default function Home() {
               medical care with traditional values.
             </p>
             <Button size="lg" className="mr-4">
-              Book Appointment
+              <Link href="/appointment">Book Appointment</Link>
             </Button>
             <Button
               variant="outline"

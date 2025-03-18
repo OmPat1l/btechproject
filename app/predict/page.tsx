@@ -199,55 +199,54 @@ const RISK_FINDINGS = {
   },
 };
 
-const generateReport = (disease: string, values: any) => {
+const BUFFER_PERCENTAGE = 0.2; // 20% buffer allowance
+
+const generateReport = (disease: keyof typeof NORMAL_RANGES, values: any) => {
   let risk = "Low";
-  let details = [];
-  let recommendations = [];
+  let details: string[] = [];
+  let recommendations: string[] = [];
 
-  // Determine risk level based on values
-  switch (disease) {
-    case "diabetes":
-      if (values.glucose > 200 || values.bmi > 35) {
-        risk = "High";
-      } else if (values.glucose > 140 || values.bmi > 25) {
-        risk = "Moderate";
-      }
-      break;
-    case "heart":
-      if (values.bloodPressure > 140 || values.cholesterol > 240) {
-        risk = "High";
-      } else if (values.bloodPressure > 120 || values.cholesterol > 200) {
-        risk = "Moderate";
-      }
-      break;
-    case "kidney":
-      if (values.specificGravity < 1.0 || values.albumin < 2.5) {
-        risk = "High";
-      } else if (values.specificGravity < 1.005 || values.albumin < 3.4) {
-        risk = "Moderate";
-      }
-      break;
-    case "liver":
-      if (values.totalBilirubin > 2.0 || values.alkalinePhosphatase > 200) {
-        risk = "High";
-      } else if (
-        values.totalBilirubin > 1.2 ||
-        values.alkalinePhosphatase > 140
-      ) {
-        risk = "Moderate";
-      }
-      break;
-  }
+  const normalRanges = NORMAL_RANGES[disease]; // ✅ Now TypeScript recognizes disease as a valid key
 
-  // Get detailed findings based on risk level
+  Object.keys(normalRanges).forEach((param) => {
+    const { min, max, unit } = normalRanges[param as keyof typeof normalRanges];
+
+    if (values[param] !== undefined) {
+      const value = parseFloat(values[param]);
+
+      const upperBuffer = max * 1.2;
+      const lowerBuffer = min * 0.8;
+
+      if (value > upperBuffer) {
+        risk = "High";
+        details.push(
+          `${param} is significantly above normal range (${value} ${unit})`
+        );
+      } else if (value < lowerBuffer) {
+        risk = "High";
+        details.push(
+          `${param} is significantly below normal range (${value} ${unit})`
+        );
+      } else if (value > max) {
+        risk = "Moderate";
+        details.push(
+          `${param} is slightly above normal range (${value} ${unit})`
+        );
+      } else if (value < min) {
+        risk = "Moderate";
+        details.push(
+          `${param} is slightly below normal range (${value} ${unit})`
+        );
+      }
+    }
+  });
+
   const findings =
-    RISK_FINDINGS[disease as keyof typeof RISK_FINDINGS][
-      risk as keyof typeof RISK_FINDINGS.diabetes
-    ];
+    RISK_FINDINGS[disease][risk as keyof typeof RISK_FINDINGS.diabetes];
 
   return {
     risk,
-    details: findings.details,
+    details: details.length ? details : findings.details,
     recommendations: findings.recommendations,
     timestamp: new Date().toLocaleString(),
   };
