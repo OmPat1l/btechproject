@@ -7,7 +7,8 @@ const diseases = [
   {
     name: "Diabetes",
     icon: Activity,
-    description: "A chronic disease that affects how your body turns food into energy. The body either doesn't make enough insulin or can't use it as well as it should.",
+    description:
+      "Diabetes mellitus refers to a group of diseases that affect how your body uses blood sugar (glucose). Glucose is vital to your health because it's an important source of energy for the cells that make up your muscles and tissues. It's also your brain's main source of fuel. The underlying cause of diabetes varies by type. But, no matter what type of diabetes you have, it can lead to excess sugar in your blood. Too much sugar in your blood can lead to serious health problems.",
     mlModel: "Random Forest Classifier",
     accuracy: "85%",
     parameters: ["Glucose Level", "Blood Pressure", "Insulin", "BMI", "Age"],
@@ -15,31 +16,53 @@ const diseases = [
   {
     name: "Heart Disease",
     icon: Heart,
-    description: "Conditions that affect the heart's structure and function. Common risk factors include high blood pressure, high cholesterol, and smoking.",
+    description:
+      "Conditions that affect the heart's structure and function. Common risk factors include high blood pressure, high cholesterol, and smoking.",
     mlModel: "Support Vector Machine",
     accuracy: "88%",
-    parameters: ["Age", "Blood Pressure", "Cholesterol", "Max Heart Rate", "Blood Sugar"],
+    parameters: [
+      "Age",
+      "Blood Pressure",
+      "Cholesterol",
+      "Max Heart Rate",
+      "Blood Sugar",
+    ],
   },
   {
     name: "Kidney Disease",
     icon: Kidney,
-    description: "A condition that impairs kidney function. Early detection through specific markers can help prevent progression to kidney failure.",
+    description:
+      "A condition that impairs kidney function. Early detection through specific markers can help prevent progression to kidney failure.",
     mlModel: "Gradient Boosting",
     accuracy: "87%",
-    parameters: ["Age", "Blood Pressure", "Specific Gravity", "Albumin", "Sugar"],
+    parameters: [
+      "Age",
+      "Blood Pressure",
+      "Specific Gravity",
+      "Albumin",
+      "Sugar",
+    ],
   },
   {
     name: "Liver Disease",
     icon: Activity,
-    description: "Various conditions that affect liver function. Early detection through blood tests can help identify liver problems before they become severe.",
+    description:
+      "Various conditions that affect liver function. Early detection through blood tests can help identify liver problems before they become severe.",
     mlModel: "XGBoost",
     accuracy: "86%",
-    parameters: ["Age", "Total Bilirubin", "Direct Bilirubin", "Alkaline Phosphatase", "Alamine Aminotransferase"],
+    parameters: [
+      "Age",
+      "Total Bilirubin",
+      "Direct Bilirubin",
+      "Alkaline Phosphatase",
+      "Alamine Aminotransferase",
+    ],
   },
   {
     name: "Malaria",
     icon: Microscope,
-    description: "A serious disease caused by parasites that infect red blood cells. Detection through blood cell image analysis can provide quick diagnosis.",
+    description:
+      "A serious disease caused by parasites that infect red blood cells. Detection through blood cell image analysis can provide quick diagnosis.",
     mlModel: "Convolutional Neural Network",
     accuracy: "94%",
     parameters: ["Blood Cell Images"],
@@ -47,7 +70,8 @@ const diseases = [
   {
     name: "Pneumonia",
     icon: Lungs,
-    description: "An infection that inflames the air sacs in the lungs. Early detection through chest X-ray analysis can lead to better treatment outcomes.",
+    description:
+      "An infection that inflames the air sacs in the lungs. Early detection through chest X-ray analysis can lead to better treatment outcomes.",
     mlModel: "Deep Learning CNN",
     accuracy: "92%",
     parameters: ["Chest X-Ray Images"],

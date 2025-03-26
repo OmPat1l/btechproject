@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://rahulchinawale.in
+
+# Sitemaps
+Sitemap: https://rahulchinawale.in/sitemap.xml

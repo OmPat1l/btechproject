@@ -1,25 +1,31 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AppointmentPage() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    date: '',
-    time: '',
-    type: '',
-    description: '',
+    name: "",
+    email: "",
+    phone: "",
+    date: "",
+    time: "",
+    type: "",
+    description: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,22 +33,26 @@ export default function AppointmentPage() {
     setLoading(true);
 
     try {
-      // Here you would typically send the form data to your backend
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulated API call
-      
+      // Simulate form submission
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulated API call
+
+      // Store the form data in localStorage (for demo purposes)
+      localStorage.setItem("appointmentData", JSON.stringify(formData));
+
       toast({
         title: "Appointment Booked",
         description: "We'll contact you shortly to confirm your appointment.",
       });
-      
+
+      // Reset form data after submission
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        date: '',
-        time: '',
-        type: '',
-        description: '',
+        name: "",
+        email: "",
+        phone: "",
+        date: "",
+        time: "",
+        type: "",
+        description: "",
       });
     } catch (error) {
       toast({
@@ -57,8 +67,10 @@ export default function AppointmentPage() {
 
   return (
     <div className="container mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold text-center mb-12">Book an Appointment</h1>
-      
+      <h1 className="text-4xl font-bold text-center mb-12">
+        Book an Appointment
+      </h1>
+
       <Card className="max-w-2xl mx-auto p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -66,7 +78,9 @@ export default function AppointmentPage() {
             <Input
               id="name"
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               required
             />
           </div>
@@ -77,7 +91,9 @@ export default function AppointmentPage() {
               id="email"
               type="email"
               value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               required
             />
           </div>
@@ -88,7 +104,9 @@ export default function AppointmentPage() {
               id="phone"
               type="tel"
               value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
               required
             />
           </div>
@@ -99,7 +117,9 @@ export default function AppointmentPage() {
               id="date"
               type="date"
               value={formData.date}
-              onChange={(e) => setFormData({...formData, date: e.target.value})}
+              onChange={(e) =>
+                setFormData({ ...formData, date: e.target.value })
+              }
               required
             />
           </div>
@@ -110,7 +130,9 @@ export default function AppointmentPage() {
               id="time"
               type="time"
               value={formData.time}
-              onChange={(e) => setFormData({...formData, time: e.target.value})}
+              onChange={(e) =>
+                setFormData({ ...formData, time: e.target.value })
+              }
               required
             />
           </div>
@@ -119,7 +141,9 @@ export default function AppointmentPage() {
             <Label htmlFor="type">Appointment Type</Label>
             <Select
               value={formData.type}
-              onValueChange={(value) => setFormData({...formData, type: value})}
+              onValueChange={(value: any) =>
+                setFormData({ ...formData, type: value })
+              }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select appointment type" />
@@ -141,7 +165,9 @@ export default function AppointmentPage() {
             <Textarea
               id="description"
               value={formData.description}
-              onChange={(e) => setFormData({...formData, description: e.target.value})}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
               placeholder="Please provide any additional information about your condition"
               className="h-32"
             />

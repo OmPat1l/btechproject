@@ -1,121 +1,203 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Stethoscope, Clock, Phone, Brain } from "lucide-react";
+import {
+  Stethoscope,
+  Phone,
+  Star,
+  Calendar,
+  Users,
+  Award,
+  MapPin,
+  Mail,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <main className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center">
-        <div
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            filter: "brightness(0.7)",
-          }}
+        <motion.div
+          className="absolute inset-0 z-0 bg-cover bg-center brightness-75"
+          style={{ backgroundImage: "url('/herosection.jpeg')" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
         />
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-2xl text-white">
-            <h1 className="text-5xl font-bold mb-6">
-              Your Health Is Our Priority
-            </h1>
-            <p className="text-xl mb-8">
-              Advanced healthcare with a personal touch. Experience modern
-              medical care with traditional values.
-            </p>
-            <Button size="lg" className="mr-4">
-              <Link href="/appointment">Book Appointment</Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="bg-white/10 backdrop-blur-sm"
+        <motion.div
+          className="container mx-auto px-6 relative z-10 text-white text-center"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <h1 className="text-6xl font-extrabold leading-tight">
+            World-Class Healthcare,<br></br> By Dr. Rahul Chinawale
+          </h1>
+          <div className="flex justify-center gap-6 mt-8">
+            <Link
+              href="https://wa.me/15551660975"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Learn More
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-20 container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <Card className="p-6">
-            <Stethoscope className="w-12 h-12 text-primary mb-4" />
-            <h3 className="text-xl font-semibold mb-2">General Consultation</h3>
-            <p className="text-gray-600">
-              Comprehensive medical checkups and consultations with our
-              experienced doctors.
-            </p>
-          </Card>
-          <Card className="p-6">
-            <Brain className="w-12 h-12 text-primary mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Disease Prediction</h3>
-            <p className="text-gray-600">
-              Advanced AI-powered disease prediction system for early detection
-              and prevention.
-            </p>
-            <Link href="/predict">
-              <Button className="mt-4" variant="outline">
-                Try Now
+              <Button
+                size="lg"
+                className="bg-[#25D366] hover:bg-[#1EBE5D] text-white"
+              >
+                WhatsApp DoctoBud
               </Button>
             </Link>
-          </Card>
-          <Card className="p-6">
-            <Clock className="w-12 h-12 text-primary mb-4" />
-            <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
-            <p className="text-gray-600">
-              Round-the-clock medical support for emergencies and urgent care
-              needs.
+            <Link href="/predict">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white text-primary hover:bg-white"
+              >
+                Try AI Diagnosis
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Doctor Profile Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h2 className="text-4xl font-bold">Meet Dr. Rahul Chinawale</h2>
+            <p className="text-gray-600 mt-2">
+              A highly skilled and experienced physician specializing in General
+              & Emergency Medicine.
             </p>
-          </Card>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Image Section */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="relative flex justify-center"
+            >
+              <img
+                src="/profile.png"
+                alt="Dr. Rahul Chinawale"
+                className="rounded-lg shadow-lg w-[70%] mx-auto"
+              />
+              <motion.div
+                className="absolute -bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md rounded-lg p-6 shadow-xl flex items-center justify-between"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                <div>
+                  <h3 className="text-xl font-semibold">Dr. Rahul Chinawale</h3>
+                  <p className="text-primary">
+                    MBBS, Seth G.S. Medical College, Mumbai
+                  </p>
+                </div>
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Information Section */}
+            <div>
+              <motion.p
+                className="text-gray-600 text-lg leading-relaxed"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 1 }}
+              >
+                With over <strong>20 years</strong> of experience, Dr. Rahul
+                Chinawale has transformed lives with expert diagnosis &
+                compassionate care. He has worked extensively in **emergency
+                medicine, general practice, and offshore medical services**.
+              </motion.p>
+
+              {/* Achievements */}
+              <motion.div
+                className="mt-6 space-y-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 1 }}
+              >
+                <div className="flex items-center gap-3">
+                  <Award className="w-5 h-5 text-primary" />
+                  <span>Board Certified in Internal Medicine</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Users className="w-5 h-5 text-primary" />
+                  <span>10,000+ Patients Treated</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Calendar className="w-5 h-5 text-primary" />
+                  <span>Available Mon-Sat, 9:00 AM - 5:00 PM</span>
+                </div>
+              </motion.div>
+
+              {/* Contact Info */}
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7, duration: 1 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <Phone className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Phone</p>
+                    <p className="font-medium">+91 99309 08114</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="bg-primary/10 p-3 rounded-full">
+                    <Mail className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Email</p>
+                    <p className="font-medium">rahulchinawale@gmail.com</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Book Appointment Button */}
+              <motion.div className="mt-8">
+                <Link href="/appointment">
+                  <Button className="w-full">Book an Appointment</Button>
+                </Link>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Doctor Section */}
-      <section className="bg-gray-50 py-20">
+      {/* Location Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Meet Our Doctor
-          </h2>
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="md:w-1/3">
-              <img
-                src="/profile.png"
-                alt="Doctor"
-                className="rounded-lg shadow-lg"
-              />
-            </div>
-            <div className="md:w-2/3">
-              <h3 className="text-2xl font-semibold mb-4">
-                Dr. Rahul Chinawale
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Experienced General Practitioner Dr. Rahul Chinawale is a highly
-                qualified medical professional with an M.B.B.S. from Seth G.S.
-                Medical College, Mumbai University (1998) and over two decades
-                of clinical experience. He has worked extensively as a Medical
-                Officer in government and private healthcare, including roles at
-                K.E.M. Hospital, Jehangir Hospital, and PHCs in Maharashtra. His
-                expertise spans general practice, emergency care, endocrinology,
-                and public health programs like tuberculosis and malaria
-                control. With a strong commitment to patient care, he has also
-                served as a General Practitioner in Dombivli for four years.
-              </p>
-              <div className="flex items-center gap-4">
-                <Phone className="w-5 h-5 text-primary" />
-                <span className="text-gray-600">9930908114</span>
-                <span className="text-gray-600">rahulchinawale@gmail.com</span>
-              </div>
-            </div>
-          </div>
+          <motion.div
+            className="text-center mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            {/* <h2 className="text-4xl font-bold">Find Us</h2>
+            <p className="text-gray-600">Visit our state-of-the-art clinic.</p> */}
+          </motion.div>
         </div>
       </section>
     </main>
